@@ -1,5 +1,6 @@
 "use strict";
 var fs = require('fs');
+var path = require("path");
 var showdown = require('showdown');
 
 /** Check for arguments*/
@@ -19,15 +20,41 @@ if (type == "-e") {
     readFolder(mdParam);
 }
 
+/**
+ * Mardown文件转化为html文件
+ * @param mdFile
+ * @param outHtmlFile
+ */
 function convertFile(mdFile, outHtmlFile) {
     var mdData = fs.readFileSync(mdFile, 'utf-8');
     let converter = new showdown.Converter();
-    let html = converter.makeHtml(mdData);
+    let htmlData = converter.makeHtml(mdData);
     console.log("outHtmlFile : " + outHtmlFile);
-    fs.writeFileSync(outHtmlFile, html);
+    let outFolder = path.dirname(outHtmlFile);
+    mkdirs(outFolder);
+    fs.writeFileSync(outHtmlFile, htmlData);
     console.log("OK.");
 }
 
+/**
+ * 递归创建目录
+ * @param dirPath 创建目录名
+ */
+function mkdirs(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        let dirName = path.dirname(dirPath);
+        let exist = fs.existsSync(dirName);
+        if (exist) {
+            fs.mkdirSync(dirPath);
+        } else {
+            mkdirs(dirName);
+        }
+    }
+}
+/**
+ * 读取目录中的MD文件
+ * @param folderName
+ */
 function readFolder(folderName) {
     console.log("readFolder folderName : " + folderName);
     fs.readdir(folderName, function (err, files) {
@@ -54,7 +81,8 @@ function readFolder(folderName) {
                             let subFulder = folderName.replace(mdParam + "/", '');
                             let outFolder = htmlParam + '/' + subFulder;
                             let exist = fs.existsSync(outFolder);
-                            if(!exist) {
+                            if (!exist) {
+                                console.log('not exist make dir outFolder :' + outFolder);
                                 fs.mkdirSync(outFolder);
                             }
                             outFileName = outFolder + '/' + file.replace('.md', '.html');
@@ -62,7 +90,6 @@ function readFolder(folderName) {
                         folderName.trim();
                         outFileName.trim();
                         console.log('mdFile:' + mdFile + ' outFileName :' + outFileName);
-                        //todo edit out folder name
                         convertFile(mdFile, outFileName);
                     }
                 }
