@@ -114,15 +114,9 @@ function convertFile(mdFile, outHtmlFile, fileName) {
     contextFirst.sub_folder = article_path_sub_folder;
     /** 读取handlebars模板数据*/
     const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
-    const compiledFirst = Handlebars.compile(mustache_data);
-    /** 这里需要转化2遍, 第一遍 {{{content}}}中模板数据{{}}不变,转化其他模板数据*/
-    let firstHtmlData = compiledFirst(contextFirst);
-    // /** 第二遍 以第一次转化的数据作为模板,转化{{{content}}}中的模板数据{{web_url}}*/
-    // let contextSecond = {};
-    // contextSecond.article_type = article_type;
-    // contextSecond.sub_folder = article_path_sub_folder;
-    // const compiledSecond = Handlebars.compile(firstHtmlData);
-    // let finalHtmlData = compiledSecond(contextSecond);
+    /** 转化为html数据*/
+    const compiled = Handlebars.compile(mustache_data);
+    let firstHtmlData = compiled(contextFirst);
     /** 写入文件*/
     fs.writeFileSync(outHtmlFile, firstHtmlData);
     console.log("OK.");
