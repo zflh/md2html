@@ -12,38 +12,38 @@ showdown.Converter = function (converterOptions) {
   'use strict';
 
   var
-      /**
-       * Options used by this converter
-       * @private
-       * @type {{}}
-       */
-      options = {},
+    /**
+     * Options used by this converter
+     * @private
+     * @type {{}}
+     */
+    options = {},
 
-      /**
-       * Language extensions used by this converter
-       * @private
-       * @type {Array}
-       */
-      langExtensions = [],
+    /**
+     * Language extensions used by this converter
+     * @private
+     * @type {Array}
+     */
+    langExtensions = [],
 
-      /**
-       * Output modifiers extensions used by this converter
-       * @private
-       * @type {Array}
-       */
-      outputModifiers = [],
+    /**
+     * Output modifiers extensions used by this converter
+     * @private
+     * @type {Array}
+     */
+    outputModifiers = [],
 
-      /**
-       * Event listeners
-       * @private
-       * @type {{}}
-       */
-      listeners = {},
+    /**
+     * Event listeners
+     * @private
+     * @type {{}}
+     */
+    listeners = {},
 
-      /**
-       * The flavor set in this converter
-       */
-      setConvFlavor = setFlavor;
+    /**
+     * The flavor set in this converter
+     */
+    setConvFlavor = setFlavor;
 
   _constructor();
 
@@ -51,7 +51,7 @@ showdown.Converter = function (converterOptions) {
    * Converter constructor
    * @private
    */
-  function _constructor () {
+  function _constructor() {
     converterOptions = converterOptions || {};
 
     for (var gOpt in globalOptions) {
@@ -69,7 +69,7 @@ showdown.Converter = function (converterOptions) {
       }
     } else {
       throw Error('Converter expects the passed parameter to be an object, but ' + typeof converterOptions +
-      ' was passed instead.');
+        ' was passed instead.');
     }
 
     if (options.extensions) {
@@ -83,7 +83,7 @@ showdown.Converter = function (converterOptions) {
    * @param {string} [name='']
    * @private
    */
-  function _parseExtension (ext, name) {
+  function _parseExtension(ext, name) {
 
     name = name || null;
     // If it's a string, the extension was previously loaded
@@ -97,7 +97,7 @@ showdown.Converter = function (converterOptions) {
           'Please inform the developer that the extension should be updated!');
         legacyExtensionLoading(showdown.extensions[ext], ext);
         return;
-      // END LEGACY SUPPORT CODE
+        // END LEGACY SUPPORT CODE
 
       } else if (!showdown.helper.isUndefined(extensions[ext])) {
         ext = extensions[ext];
@@ -147,7 +147,7 @@ showdown.Converter = function (converterOptions) {
    * @param {*} ext
    * @param {string} name
    */
-  function legacyExtensionLoading (ext, name) {
+  function legacyExtensionLoading(ext, name) {
     if (typeof ext === 'function') {
       ext = ext(new showdown.Converter());
     }
@@ -179,7 +179,7 @@ showdown.Converter = function (converterOptions) {
    * @param {string} name
    * @param {function} callback
    */
-  function listen (name, callback) {
+  function listen(name, callback) {
     if (!showdown.helper.isString(name)) {
       throw Error('Invalid argument in converter.listen() method: name must be a string, but ' + typeof name + ' given');
     }
@@ -194,9 +194,9 @@ showdown.Converter = function (converterOptions) {
     listeners[name].push(callback);
   }
 
-  function rTrimInputText (text) {
+  function rTrimInputText(text) {
     var rsp = text.match(/^\s*/)[0].length,
-        rgx = new RegExp('^\\s{0,' + rsp + '}', 'gm');
+      rgx = new RegExp('^\\s{0,' + rsp + '}', 'gm');
     return text.replace(rgx, '');
   }
 
@@ -209,7 +209,7 @@ showdown.Converter = function (converterOptions) {
    * @param {{}} globals
    * @returns {string}
    */
-  this._dispatch = function dispatch (evtName, text, options, globals) {
+  this._dispatch = function dispatch(evtName, text, options, globals) {
     if (listeners.hasOwnProperty(evtName)) {
       for (var ei = 0; ei < listeners[evtName].length; ++ei) {
         var nText = listeners[evtName][ei](evtName, text, this, options, globals);
@@ -244,18 +244,18 @@ showdown.Converter = function (converterOptions) {
     }
 
     var globals = {
-      gHtmlBlocks:     [],
-      gHtmlMdBlocks:   [],
-      gHtmlSpans:      [],
-      gUrls:           {},
-      gTitles:         {},
-      gDimensions:     {},
-      gListLevel:      0,
-      hashLinkCounts:  {},
-      langExtensions:  langExtensions,
+      gHtmlBlocks: [],
+      gHtmlMdBlocks: [],
+      gHtmlSpans: [],
+      gUrls: {},
+      gTitles: {},
+      gDimensions: {},
+      gListLevel: 0,
+      hashLinkCounts: {},
+      langExtensions: langExtensions,
       outputModifiers: outputModifiers,
-      converter:       this,
-      ghCodeBlocks:    []
+      converter: this,
+      ghCodeBlocks: []
     };
 
     // This lets us use ¨ trema as an escape char to avoid md5 hashes

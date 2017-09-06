@@ -1,7 +1,7 @@
 require('source-map-support').install();
 require('chai').should();
 var expect = require('chai').expect,
-    showdown = require('../bootstrap').showdown;
+  showdown = require('../bootstrap').showdown;
 
 describe('showdown.options', function () {
   'use strict';
@@ -27,12 +27,13 @@ describe('showdown.extension()', function () {
   'use strict';
 
   var extObjMock = {
-        type: 'lang',
-        filter: function () {}
-      },
-      extObjFunc = function () {
-        return extObjMock;
-      };
+      type: 'lang',
+      filter: function () {
+      }
+    },
+    extObjFunc = function () {
+      return extObjMock;
+    };
 
   describe('should register', function () {
     it('an extension object', function () {
@@ -101,7 +102,8 @@ describe('showdown.getAllExtensions()', function () {
   'use strict';
   var extObjMock = {
     type: 'lang',
-    filter: function () {}
+    filter: function () {
+    }
   };
 
   it('should return all extensions', function () {
@@ -121,7 +123,7 @@ describe('showdown.setFlavor()', function () {
   it('should set options correctly', function () {
     showdown.setFlavor('github');
     var ghOpts = showdown.getFlavorOptions('github'),
-        shOpts = showdown.getOptions();
+      shOpts = showdown.getOptions();
     for (var opt in ghOpts) {
       if (ghOpts.hasOwnProperty(opt)) {
         shOpts.should.have.property(opt);
@@ -134,8 +136,8 @@ describe('showdown.setFlavor()', function () {
   it('should switch between flavors correctly', function () {
     showdown.setFlavor('github');
     var ghOpts = showdown.getFlavorOptions('github'),
-        shOpts = showdown.getOptions(),
-        dfOpts = showdown.getDefaultOptions();
+      shOpts = showdown.getOptions(),
+      dfOpts = showdown.getDefaultOptions();
     for (var opt in dfOpts) {
       if (ghOpts.hasOwnProperty(opt)) {
         shOpts[opt].should.equal(ghOpts[opt]);

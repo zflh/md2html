@@ -6,13 +6,13 @@
 /*jshint -W010 */
 /*jshint -W009 */
 var bootstrap = require('../bootstrap.js'),
-    showdown = bootstrap.showdown;
+  showdown = bootstrap.showdown;
 
 describe('encodeEmailAddress()', function () {
   'use strict';
   var encoder = showdown.helper.encodeEmailAddress,
-      email = 'foobar@example.com',
-      encodedEmail = encoder(email);
+    email = 'foobar@example.com',
+    encodedEmail = encoder(email);
 
   it('should encode email', function () {
     encodedEmail.should.not.equal(email);
@@ -66,16 +66,20 @@ describe('isFunction()', function () {
   var isFunction = showdown.helper.isFunction;
 
   it('should return true for closures', function () {
-    isFunction(function () {}).should.be.true;
+    isFunction(function () {
+    }).should.be.true;
   });
 
   it('should return true for defined functions', function () {
-    function foo () {}
+    function foo() {
+    }
+
     isFunction(foo).should.be.true;
   });
 
   it('should return true for function variables', function () {
-    var bar = function () {};
+    var bar = function () {
+    };
     isFunction(bar).should.be.true;
   });
 
@@ -84,7 +88,7 @@ describe('isFunction()', function () {
   });
 
   it('should return false for objects', function () {
-    isFunction(new Object ()).should.be.false;
+    isFunction(new Object()).should.be.false;
   });
 
   it('should return false for string primitives', function () {
@@ -106,14 +110,17 @@ describe('isArray()', function () {
   });
 
   it('should return false for functions', function () {
-    isArray(function () {}).should.be.false;
-    function baz () {}
+    isArray(function () {
+    }).should.be.false;
+    function baz() {
+    }
+
     isArray(baz).should.be.false;
   });
 
   it('should return false for objects', function () {
     isArray({}).should.be.false;
-    isArray(new Object ()).should.be.false;
+    isArray(new Object()).should.be.false;
   });
 
   it('should return false for strings', function () {
@@ -180,23 +187,35 @@ describe('forEach()', function () {
   var forEach = showdown.helper.forEach;
 
   it('should throw an error if first parameter is undefined', function () {
-    (function () {forEach();}).should.throw('obj param is required');
+    (function () {
+      forEach();
+    }).should.throw('obj param is required');
   });
 
   it('should throw an error if second parameter is undefined', function () {
-    (function () {forEach([]);}).should.throw('callback param is required');
+    (function () {
+      forEach([]);
+    }).should.throw('callback param is required');
   });
 
   it('should throw an error if second parameter is not a function', function () {
-    (function () {forEach([], 'foo');}).should.throw('callback param must be a function/closure');
+    (function () {
+      forEach([], 'foo');
+    }).should.throw('callback param must be a function/closure');
   });
 
   it('should throw an error if first parameter is not an object or an array', function () {
-    (function () {forEach('foo', function () {});}).should.throw('obj does not seem to be an array or an iterable object');
+    (function () {
+      forEach('foo', function () {
+      });
+    }).should.throw('obj does not seem to be an array or an iterable object');
   });
 
   it('should not throw even if object is empty', function () {
-    (function () {forEach({}, function () {});}).should.not.throw();
+    (function () {
+      forEach({}, function () {
+      });
+    }).should.not.throw();
   });
 
   it('should iterate array items', function () {
@@ -220,7 +239,7 @@ describe('forEach()', function () {
 
   it('should iterate only over object own properties', function () {
     var Obj1 = {foo: 'banana'},
-        myObj = Object.create(Obj1);
+      myObj = Object.create(Obj1);
     myObj.bar = 'orange';
     myObj.baz = 'grape';
 

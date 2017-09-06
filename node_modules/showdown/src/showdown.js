@@ -4,51 +4,51 @@
 
 // Private properties
 var showdown = {},
-    parsers = {},
-    extensions = {},
-    globalOptions = getDefaultOpts(true),
-    setFlavor = 'vanilla',
-    flavor = {
-      github: {
-        omitExtraWLInCodeBlocks:              true,
-        simplifiedAutoLink:                   true,
-        excludeTrailingPunctuationFromURLs:   true,
-        literalMidWordUnderscores:            true,
-        strikethrough:                        true,
-        tables:                               true,
-        tablesHeaderId:                       true,
-        ghCodeBlocks:                         true,
-        tasklists:                            true,
-        disableForced4SpacesIndentedSublists: true,
-        simpleLineBreaks:                     true,
-        requireSpaceBeforeHeadingText:        true,
-        ghCompatibleHeaderId:                 true,
-        ghMentions:                           true
-      },
-      original: {
-        noHeaderId:                           true,
-        ghCodeBlocks:                         false
-      },
-      ghost: {
-        omitExtraWLInCodeBlocks:              true,
-        parseImgDimensions:                   true,
-        simplifiedAutoLink:                   true,
-        excludeTrailingPunctuationFromURLs:   true,
-        literalMidWordUnderscores:            true,
-        strikethrough:                        true,
-        tables:                               true,
-        tablesHeaderId:                       true,
-        ghCodeBlocks:                         true,
-        tasklists:                            true,
-        smoothLivePreview:                    true,
-        simpleLineBreaks:                     true,
-        requireSpaceBeforeHeadingText:        true,
-        ghMentions:                           false,
-        encodeEmails:                         true
-      },
-      vanilla: getDefaultOpts(true),
-      allOn: allOptionsOn()
-    };
+  parsers = {},
+  extensions = {},
+  globalOptions = getDefaultOpts(true),
+  setFlavor = 'vanilla',
+  flavor = {
+    github: {
+      omitExtraWLInCodeBlocks: true,
+      simplifiedAutoLink: true,
+      excludeTrailingPunctuationFromURLs: true,
+      literalMidWordUnderscores: true,
+      strikethrough: true,
+      tables: true,
+      tablesHeaderId: true,
+      ghCodeBlocks: true,
+      tasklists: true,
+      disableForced4SpacesIndentedSublists: true,
+      simpleLineBreaks: true,
+      requireSpaceBeforeHeadingText: true,
+      ghCompatibleHeaderId: true,
+      ghMentions: true
+    },
+    original: {
+      noHeaderId: true,
+      ghCodeBlocks: false
+    },
+    ghost: {
+      omitExtraWLInCodeBlocks: true,
+      parseImgDimensions: true,
+      simplifiedAutoLink: true,
+      excludeTrailingPunctuationFromURLs: true,
+      literalMidWordUnderscores: true,
+      strikethrough: true,
+      tables: true,
+      tablesHeaderId: true,
+      ghCodeBlocks: true,
+      tasklists: true,
+      smoothLivePreview: true,
+      simpleLineBreaks: true,
+      requireSpaceBeforeHeadingText: true,
+      ghMentions: false,
+      encodeEmails: true
+    },
+    vanilla: getDefaultOpts(true),
+    allOn: allOptionsOn()
+  };
 
 /**
  * helper namespace
@@ -258,14 +258,14 @@ showdown.resetExtensions = function () {
  * @param {string} name
  * @returns {{valid: boolean, error: string}}
  */
-function validate (extension, name) {
+function validate(extension, name) {
   'use strict';
 
   var errMsg = (name) ? 'Error in ' + name + ' extension->' : 'Error in unnamed extension',
-      ret = {
-        valid: true,
-        error: ''
-      };
+    ret = {
+      valid: true,
+      error: ''
+    };
 
   if (!showdown.helper.isArray(extension)) {
     extension = [extension];
@@ -273,7 +273,7 @@ function validate (extension, name) {
 
   for (var i = 0; i < extension.length; ++i) {
     var baseMsg = errMsg + ' sub-extension ' + i + ': ',
-        ext = extension[i];
+      ext = extension[i];
     if (typeof ext !== 'object') {
       ret.valid = false;
       ret.error = baseMsg + 'must be an object, but ' + typeof ext + ' given';

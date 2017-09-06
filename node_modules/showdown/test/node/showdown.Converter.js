@@ -34,7 +34,7 @@ describe('showdown.Converter', function () {
      */
     describe('github', function () {
       var converter = new showdown.Converter(),
-          ghOpts = showdown.getFlavorOptions('github');
+        ghOpts = showdown.getFlavorOptions('github');
 
       converter.setFlavor('github');
 
@@ -43,7 +43,7 @@ describe('showdown.Converter', function () {
           check(opt, ghOpts[opt]);
         }
       }
-      function check (key, val) {
+      function check(key, val) {
         it('should set ' + opt + ' to ' + val, function () {
           converter.getOption(key).should.equal(val);
         });
@@ -80,12 +80,13 @@ describe('showdown.Converter', function () {
 
   describe('extension methods', function () {
     var extObjMock = {
-          type: 'lang',
-          filter: function () {}
-        },
-        extObjFunc = function () {
-          return extObjMock;
-        };
+        type: 'lang',
+        filter: function () {
+        }
+      },
+      extObjFunc = function () {
+        return extObjMock;
+      };
 
     it('addExtension() should add an extension Object', function () {
       var converter = new showdown.Converter();
@@ -134,7 +135,7 @@ describe('showdown.Converter', function () {
       runListener(events[i] + '.after');
     }
 
-    function runListener (name) {
+    function runListener(name) {
       it('should listen to ' + name, function () {
         var converter = new showdown.Converter();
         converter.listen(name, function (evtName, text) {
