@@ -1,2 +1,2 @@
-node md2html.js D:\workplace\git\Doc\educate\excel\basic D:\workplace\temp\excel\basic Excel教程 基础篇
+node md2html.js D:\workplace\git\Doc\educate\excel\basic D:\workplace\git\Doc\dashidan.com\article\excel\basic Excel教程 基础篇 excel basic
 pause

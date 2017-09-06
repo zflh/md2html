@@ -7,11 +7,11 @@
     <meta name="description" content="{{title}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="apple-touch-icon" href="http://localhost/apple-touch-icon.png">
+    <link rel="stylesheet" href="http://localhost/css/main.css">
+    <link rel="stylesheet" href="http://localhost/css/bootstrap.css">
 
-    <link href="../../css/docs.css" rel="stylesheet">
+    <link href="http://localhost/css/docs.css" rel="stylesheet">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -31,15 +31,15 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="../../img/dsd24.png">
+                <img src="http://localhost/img/dsd24.png">
             </a>
-            <a class="navbar-brand" href="../../index.html">大屎蛋教程网</a>
+            <a class="navbar-brand" href="http://localhost/index.html">大屎蛋教程网</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="../../about.html">关于</a></li>
+                <li><a href="http://localhost/about.html">关于</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">登陆</a></li>
@@ -52,16 +52,11 @@
 <div class="container">
     <!-- 文章导航条-->
     <ol class="breadcrumb">
-        <li><a href="../../index.html">首页</a></li>
-        <li><a href="../index.html">{{educate}}</a></li>
-        <li class="active"><a href="index.html">{{level}}</a></li>
+        <li><a href="http://localhost/index.html">首页</a></li>
+        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
     </ol>
     <hr>
-    <!--视频区-->
-    <!--<div>-->
-        <!--<img class="center-block img-responsive" src="../../img/dsd_500_309.png">-->
-    <!--</div>-->
-    <!--<hr>-->
     <!--标题区-->
     <div class="page-header">
         <h2>{{title}}</h2>
@@ -74,28 +69,28 @@
     <hr>
     <!-- 文章导航条-->
     <ol class="breadcrumb">
-        <li><a href="../../index.html">首页</a></li>
-        <li><a href="../index.html">{{educate}}</a></li>
-        <li class="active"><a href="index.html">{{level}}</a></li>
+        <li><a href="http://localhost/index.html">首页</a></li>
+        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
     </ol>
     <hr>
     <nav>
         <ul class="pager">
             {{#if last}}
-                <li><a href="{{last}}"><span>&larr;</span>上一篇</a></li>
+                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}"><span>&larr;</span>上一篇</a></li>
             {{/if}}
             {{#if next}}
-                <li><a href="{{next}}">下一篇<span>&rarr;</span></a></li>
+                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}">下一篇<span>&rarr;</span></a></li>
             {{/if}}
         </ul>
     </nav>
 </div>
 
 
-<script src="../../js/jquery-3.2.1.min.js"></script>
-<script src="../../js/vendor/modernizr-custom.js"></script>
-<script src="../../js/bootstrap.js"></script>
-<script src="http://dashidan.com/js/google-code-prettify/run_prettify.js"></script>
+<script src="http://localhost/js/jquery-3.2.1.min.js"></script>
+<script src="http://localhost/js/vendor/modernizr-custom.js"></script>
+<script src="http://localhost/js/bootstrap.js"></script>
+<script src="http://localhost/js/google-code-prettify/run_prettify.js"></script>
 
 </body>
 </html>

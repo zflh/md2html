@@ -1,2 +1,2 @@
-node md2html.js D:\workplace\git\Doc\educate\git\basic D:\workplace\temp\git\basic Git教程 基础篇
+node md2html.js D:\workplace\git\Doc\educate\git\basic D:\workplace\git\Doc\dashidan.com\article\git\basic Git教程 基础篇 git basic
 pause

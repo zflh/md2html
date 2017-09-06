@@ -1,2 +1,2 @@
-node md2html.js D:\workplace\git\Doc\educate\java\basic D:\workplace\temp\java\basic Java教程 基础篇
+node md2html.js D:\workplace\git\Doc\educate\java\basic D:\workplace\git\Doc\dashidan.com\article\java\basic Java教程 基础篇 java basic
 pause

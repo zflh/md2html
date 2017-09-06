@@ -1,2 +1,2 @@
-node md2html.js D:\workplace\git\Doc\educate\windows\basic D:\workplace\temp\windows\basic Windows教程 基础篇
+node md2html.js D:\workplace\git\Doc\educate\windows\basic D:\workplace\git\Doc\dashidan.com\article\windows\basic Windows教程 基础篇 windows basic
 pause
