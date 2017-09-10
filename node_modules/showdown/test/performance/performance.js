@@ -3,17 +3,17 @@
  */
 'use strict';
 var now = require('performance-now'),
-    fs = require('fs'),
-    semverSort = require('semver-sort'),
-    performance = {
-      version: '',
-      libraryName: '',
-      MDFile: 'performance.log.md',
-      logFile: 'performance.json',
-      testSuites: [],
-      silent: false,
-      githubLink: ''
-    };
+  fs = require('fs'),
+  semverSort = require('semver-sort'),
+  performance = {
+    version: '',
+    libraryName: '',
+    MDFile: 'performance.log.md',
+    logFile: 'performance.json',
+    testSuites: [],
+    silent: false,
+    githubLink: ''
+  };
 
 performance.setVersion = function (version) {
   performance.version = version;
@@ -35,7 +35,7 @@ performance.generateLog = function (filename, MDFilename, asTable) {
   fs.closeSync(fs.openSync(filename, 'a'));
 
   var json = fs.readFileSync(filename),
-      jsonParsed;
+    jsonParsed;
 
   try {
     jsonParsed = JSON.parse(json);
@@ -48,13 +48,13 @@ performance.generateLog = function (filename, MDFilename, asTable) {
   for (var i = 0; i < performance.testSuites.length; ++i) {
     // Suite
     var suiteName = performance.testSuites[i].getSuiteName(),
-        cycles = performance.testSuites[i].getOption('cycles'),
-        subJData = {
-          suiteName: suiteName,
-          cycles: cycles,
-          tests: []
-        },
-        testSuite = performance.testSuites[i].getTests();
+      cycles = performance.testSuites[i].getOption('cycles'),
+      subJData = {
+        suiteName: suiteName,
+        cycles: cycles,
+        tests: []
+      },
+      testSuite = performance.testSuites[i].getTests();
     //make sure tests have ran first
     if (!performance.testSuites[i].hasRun()) {
       performance.testSuites[i].run();
@@ -98,7 +98,7 @@ performance.generateLog = function (filename, MDFilename, asTable) {
   generateMD(MDFilename, finalJsonObj, asTable);
 };
 
-function generateMD (filename, obj, asTable) {
+function generateMD(filename, obj, asTable) {
   fs.closeSync(fs.openSync(filename, 'w'));
   asTable = !!asTable;
 
@@ -118,8 +118,8 @@ function generateMD (filename, obj, asTable) {
         }
         for (var ii = 0; ii < tests.length; ++ii) {
           var time = parseFloat(tests[ii].time).toFixed(3),
-              maxTime = parseFloat(tests[ii].maxTime).toFixed(3),
-              minTime = parseFloat(tests[ii].minTime).toFixed(3);
+            maxTime = parseFloat(tests[ii].maxTime).toFixed(3),
+            minTime = parseFloat(tests[ii].minTime).toFixed(3);
           if (asTable) {
             otp += '|' + tests[ii].name + '|' + time + '|' + maxTime + '|' + minTime + '|\n';
           } else {
@@ -136,11 +136,11 @@ function generateMD (filename, obj, asTable) {
 
 performance.Suite = function (name) {
   var suiteName = name || '',
-      tests = [],
-      hasRunFlag = false,
-      options = {
-        cycles: 20
-      };
+    tests = [],
+    hasRunFlag = false,
+    options = {
+      cycles: 20
+    };
 
   this.setOption = function (key, val) {
     options[key] = val;
@@ -154,9 +154,11 @@ performance.Suite = function (name) {
   this.add = function (name, obj) {
     if (typeof obj === 'function') {
       obj = {
-        prepare: function () {},
+        prepare: function () {
+        },
         test: obj,
-        teardown: function () {}
+        teardown: function () {
+        }
       };
     }
 
@@ -169,11 +171,13 @@ performance.Suite = function (name) {
     }
 
     if (!obj.hasOwnProperty('prepare')) {
-      obj.prepare = function () {};
+      obj.prepare = function () {
+      };
     }
 
     if (!obj.hasOwnProperty('teardown')) {
-      obj.teardown = function () {};
+      obj.teardown = function () {
+      };
     }
 
     if (typeof obj.prepare !== 'function') {
@@ -194,19 +198,21 @@ performance.Suite = function (name) {
     return this;
   };
 
-  this.run = function run () {
+  this.run = function run() {
     var nn = options.cycles;
     console.log('running tests: ' + nn + ' cycles each.');
     for (var i = 0; i < tests.length; ++i) {
       var times = [],
-          passVar = tests[i].obj.prepare();
+        passVar = tests[i].obj.prepare();
       for (var ii = 0; ii < nn; ++ii) {
         var before = now();
         tests[i].obj.test(passVar);
         var after = now();
         times.push(after - before);
       }
-      var total = times.reduce(function (a, b) {return a + b;}, 0);
+      var total = times.reduce(function (a, b) {
+        return a + b;
+      }, 0);
       tests[i].time = total / options.cycles;
       tests[i].minTime = Math.min.apply(null, times);
       tests[i].maxTime = Math.max.apply(null, times);

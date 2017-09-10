@@ -12,8 +12,8 @@ showdown.subParser('codeBlocks', function (text, options, globals) {
   var pattern = /(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=¨0))/g;
   text = text.replace(pattern, function (wholeMatch, m1, m2) {
     var codeblock = m1,
-        nextChar = m2,
-        end = '\n';
+      nextChar = m2,
+      end = '\n';
 
     codeblock = showdown.subParser('outdent')(codeblock, options, globals);
     codeblock = showdown.subParser('encodeCode')(codeblock, options, globals);

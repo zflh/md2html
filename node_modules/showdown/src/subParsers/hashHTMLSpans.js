@@ -5,7 +5,7 @@ showdown.subParser('hashHTMLSpans', function (text, options, globals) {
   'use strict';
   text = globals.converter._dispatch('hashHTMLSpans.before', text, options, globals);
 
-  function hashHTMLSpan (html) {
+  function hashHTMLSpan(html) {
     return '¨C' + (globals.gHtmlSpans.push(html) - 1) + 'C';
   }
 
@@ -44,8 +44,8 @@ showdown.subParser('unhashHTMLSpans', function (text, options, globals) {
 
   for (var i = 0; i < globals.gHtmlSpans.length; ++i) {
     var repText = globals.gHtmlSpans[i],
-        // limiter to prevent infinite loop (assume 10 as limit for recurse)
-        limit = 0;
+      // limiter to prevent infinite loop (assume 10 as limit for recurse)
+      limit = 0;
 
     while (/¨C(\d+)C/.test(repText)) {
       var num = RegExp.$1;

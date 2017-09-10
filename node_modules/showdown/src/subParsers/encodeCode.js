@@ -12,10 +12,10 @@ showdown.subParser('encodeCode', function (text, options, globals) {
   // entities within a Markdown code span.
   text = text
     .replace(/&/g, '&amp;')
-  // Do the angle bracket song and dance:
+    // Do the angle bracket song and dance:
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-  // Now, escape characters that are magic in Markdown:
+    // Now, escape characters that are magic in Markdown:
     .replace(/([*_{}\[\]\\=~-])/g, showdown.helper.escapeCharactersCallback);
 
   text = globals.converter._dispatch('encodeCode.after', text, options, globals);

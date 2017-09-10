@@ -31,7 +31,7 @@ yargs
   .wrap(yargs.terminalWidth());
 
 var argv = yargs.argv,
-    command = argv._[0];
+  command = argv._[0];
 
 if (command === 'makehtml') {
   require('./makehtml.cmd.js').run();

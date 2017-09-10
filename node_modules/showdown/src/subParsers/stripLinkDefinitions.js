@@ -26,7 +26,7 @@ showdown.subParser('stripLinkDefinitions', function (text, options, globals) {
       }
       if (options.parseImgDimensions && width && height) {
         globals.gDimensions[linkId] = {
-          width:  width,
+          width: width,
           height: height
         };
       }

@@ -3,32 +3,32 @@
  */
 'use strict';
 var fs = require('fs'),
-    showdown = require('../bootstrap').showdown,
-    converter = new showdown.Converter(),
-    pkg = require('../../package.json'),
-    performance = require('../performance/performance.js');
+  showdown = require('../bootstrap').showdown,
+  converter = new showdown.Converter(),
+  pkg = require('../../package.json'),
+  performance = require('../performance/performance.js');
 
 performance.setLibraryName(pkg.name);
 performance.setVersion(pkg.version);
 performance.setGithubLink('https://github.com/showdownjs/showdown/tree/');
 
 var globals = {
-      gHtmlBlocks:     [],
-      gHtmlMdBlocks:   [],
-      gHtmlSpans:      [],
-      gUrls:           {},
-      gTitles:         {},
-      gDimensions:     {},
-      gListLevel:      0,
-      hashLinkCounts:  {},
-      langExtensions:  [],
-      outputModifiers: [],
-      converter:       converter,
-      ghCodeBlocks:    []
-    },
-    options = showdown.getOptions();
+    gHtmlBlocks: [],
+    gHtmlMdBlocks: [],
+    gHtmlSpans: [],
+    gUrls: {},
+    gTitles: {},
+    gDimensions: {},
+    gListLevel: 0,
+    hashLinkCounts: {},
+    langExtensions: [],
+    outputModifiers: [],
+    converter: converter,
+    ghCodeBlocks: []
+  },
+  options = showdown.getOptions();
 
-function runTests () {
+function runTests() {
   var testMDFile = fs.readFileSync('test/performance.testfile.md', 'utf8');
   new performance.Suite('Basic')
     .setOption('cycles', 50)
@@ -55,10 +55,10 @@ function runTests () {
       showdown.subParser('autoLinks')(testMDFile, options, globals);
     })
     /*
-    .add('blockGamut', function () {
-      showdown.subParser('blockGamut')(testMDFile, options, globals);
-    })
-    */
+     .add('blockGamut', function () {
+     showdown.subParser('blockGamut')(testMDFile, options, globals);
+     })
+     */
     .add('blockQuotes', function () {
       showdown.subParser('blockQuotes')(testMDFile, options, globals);
     })
@@ -136,7 +136,7 @@ function runTests () {
     });
 }
 
-function generateLogs () {
+function generateLogs() {
   performance.generateLog(null, null, true);
 }
 

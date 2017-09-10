@@ -1,56 +1,44 @@
 "use strict";
-var fs = require('fs');
-var path = require("path");
-var showdown = require('showdown');
+const fs = require('fs');
+const path = require("path");
+const showdown = require('showdown');
+const Handlebars = require("handlebars");
 
 /** Check for arguments*/
-if (process.argv.length < 5) {
-    console.log("Usage: node md2html.js -e MD_FILE OUT_HTML_FILE");
-    console.log("       node md2html.js -r FOLDER_NAME OUT_FOLDER_NAME");
+if (process.argv.length < 8) {
+    console.log("Usage: node md2html.js FOLDER_NAME OUT_FOLDER_NAME educate_str educate_level article_path article_path_sub_folder");
     process.exit(1);
 }
 
-var type = process.argv[2];
-var mdParam = process.argv[3];
-var htmlParam = process.argv[4];
+const mdParam = process.argv[2];
+const htmlParam = process.argv[3];
+const educateStr = process.argv[4];
+const educateLevel = process.argv[5];
+const article_type = process.argv[6];
+const article_path_sub_folder = process.argv[7];
 
-if (type == "-e") {
-    convertFile(mdParam, htmlParam);
-} else if (type == "-r") {
-    readFolder(mdParam);
-}
+var allFileName = [];
+getAllFolderFileName(mdParam);
 
-/**
- * Mardown文件转化为html文件
- * @param mdFile
- * @param outHtmlFile
- */
-function convertFile(mdFile, outHtmlFile) {
-    var mdData = fs.readFileSync(mdFile, 'utf-8');
-    let converter = new showdown.Converter();
-    let htmlData = converter.makeHtml(mdData);
-    console.log("outHtmlFile : " + outHtmlFile);
-    let outFolder = path.dirname(outHtmlFile);
-    mkdirs(outFolder);
-    fs.writeFileSync(outHtmlFile, htmlData);
-    console.log("OK.");
-}
-
-/**
- * 递归创建目录
- * @param dirPath 创建目录名
- */
-function mkdirs(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-        let dirName = path.dirname(dirPath);
-        let exist = fs.existsSync(dirName);
-        if (exist) {
-            fs.mkdirSync(dirPath);
-        } else {
-            mkdirs(dirName);
+function getAllFolderFileName(folderName) {
+    console.log("readFolder folderName : " + folderName);
+    fs.readdir(folderName, function (err, files) {
+        if (err) {
+            console.log('error:\n' + err);
+            return;
         }
-    }
+        files.forEach(function (file) {
+            if (file.endsWith('.md')) {
+                allFileName.push(file);
+            }
+        });
+    });
 }
+
+console.log("allFileName: " + allFileName);
+
+readFolder(mdParam);
+
 /**
  * 读取目录中的MD文件
  * @param folderName
@@ -90,10 +78,97 @@ function readFolder(folderName) {
                         folderName.trim();
                         outFileName.trim();
                         console.log('mdFile:' + mdFile + ' outFileName :' + outFileName);
-                        convertFile(mdFile, outFileName);
+                        convertFile(mdFile, outFileName, file);
                     }
                 }
             });
         });
     });
+}
+
+/**
+ * Mardown文件转化为html文件
+ * @param mdFile
+ * @param outHtmlFile
+ */
+function convertFile(mdFile, outHtmlFile, fileName) {
+    const mdData = fs.readFileSync(mdFile, 'utf-8');
+    let converter = new showdown.Converter();
+    let htmlData = converter.makeHtml(mdData);
+    console.log("outHtmlFile : " + outHtmlFile);
+    let outFolder = path.dirname(outHtmlFile);
+    mkdirs(outFolder);
+    /** 不转化index.md, 采用单独的模板, 这里只转化文章内容*/
+    console.log("-------------------------------------------------------");
+    console.log("convertFile fileName " + fileName);
+    console.log("-------------------------------------------------------");
+    const num = parseInt(fileName.split('.')[0]);
+    let contextFirst = {};
+    contextFirst.title = fileName.replace('.md', '');
+    contextFirst.content = htmlData;
+    contextFirst.educate = educateStr;
+    contextFirst.level = educateLevel;
+    contextFirst.last = getLast(num);
+    contextFirst.next = getNext(num);
+    contextFirst.article_type = article_type;
+    contextFirst.sub_folder = article_path_sub_folder;
+    /** 读取handlebars模板数据*/
+    const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
+    /** 转化为html数据*/
+    const compiled = Handlebars.compile(mustache_data);
+    let firstHtmlData = compiled(contextFirst);
+    /** 写入文件*/
+    fs.writeFileSync(outHtmlFile, firstHtmlData);
+    console.log("OK.");
+}
+
+/**
+ * 递归创建目录
+ * @param dirPath 创建目录名
+ */
+function mkdirs(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        let dirName = path.dirname(dirPath);
+        let exist = fs.existsSync(dirName);
+        if (exist) {
+            fs.mkdirSync(dirPath);
+        } else {
+            mkdirs(dirName);
+        }
+    }
+}
+
+/**
+ * 获取上一篇链接
+ * @param num
+ * @return {*}
+ */
+function getLast(num) {
+    const lastNum = num - 1;
+    const lastFileStart = lastNum + ".";
+
+    let i = 0, length = allFileName.length;
+    for (; i < length; i++) {
+        if (allFileName[i].startsWith(lastFileStart)) {
+            return allFileName[i].replace('.md', '.html');
+        }
+    }
+    return null;
+}
+/**
+ * 获取下一篇链接
+ * @param num
+ * @return {*}
+ */
+function getNext(num) {
+    const nextNum = num + 1;
+    const nextFileStart = nextNum + ".";
+
+    let i = 0, length = allFileName.length;
+    for (; i < length; i++) {
+        if (allFileName[i].startsWith(nextFileStart)) {
+            return allFileName[i].replace('.md', '.html');
+        }
+    }
+    return null;
 }
