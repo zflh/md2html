@@ -1,7 +1,7 @@
 "use strict";
 const fs = require('fs');
 const path = require("path");
-const showdown = require('showdown');
+const showdown = require('sinbad_showdown');
 const Handlebars = require("handlebars");
 
 /** Check for arguments*/
