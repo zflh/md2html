@@ -1,0 +1,23 @@
+{
+  "name": "md2html",
+  "version": "1.0.0",
+  "description": "markdown to html",
+  "main": "md2html.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashidan/md2html.git"
+  },
+  "author": "Sinbad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dashidan/md2html/issues"
+  },
+  "homepage": "https://github.com/dashidan/md2html#readme",
+  "dependencies": {
+    "handlebars": "^4.0.10",
+    "sinbad_showdown": "^1.0.3"
+  }
+}
