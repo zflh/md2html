@@ -1,0 +1,13 @@
+{
+  "educate_str": "Excel教程",
+  "tab_content": {
+    "index": {
+      "url": "http://localhost/article/excel/index.html",
+      "text": "Excel教程"
+    },
+    "basic": {
+      "url": "http://localhost/article/excel/basic/index.html",
+      "text": "基础篇"
+    }
+  }
+}

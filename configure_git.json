@@ -1,0 +1,13 @@
+{
+  "educate_str": "Git教程",
+  "tab_content": {
+    "index": {
+      "url": "http://localhost/article/git/index.html",
+      "text": "Git教程"
+    },
+    "basic": {
+      "url": "http://localhost/article/git/basic/index.html",
+      "text": "基础篇"
+    }
+  }
+}
