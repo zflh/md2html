@@ -39,44 +39,46 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="http://localhost/about.html">关于</a></li>
-                <!--<li><a href="#">登陆</a></li>-->
-                <!--<li><a href="#">注册</a></li>-->
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <!-- 文章导航条-->
-    <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
-    </ol>
-    <hr>
+    <!-- 顶部标签页-->
+    <ul class="nav nav-tabs" role="tablist">
+        {{#each tab_content}}
+            {{#if isActive}}
+                <li class="active"><a href="{{url}}">{{text}}</a></li>
+            {{else}}
+                <li><a href="{{url}}">{{text}}</a></li>
+            {{/if}}
+        {{/each}}
+    </ul>
     <!--文档区-->
     <div>
         <!-- 替换这个区域-->
         {{{content}}}
     </div>
     <hr>
-    <!-- 文章导航条-->
-    <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
-    </ol>
-    <hr>
     <nav>
         <ul class="pager">
             {{#if last}}
-                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}"><span>&larr;</span>上一篇</a></li>
+                <li>
+                    <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}"><span>&larr;</span>上一篇</a>
+                </li>
             {{/if}}
             {{#if next}}
-                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}">下一篇<span>&rarr;</span></a></li>
+                <li>
+                    <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}">下一篇<span>&rarr;</span></a>
+                </li>
             {{/if}}
         </ul>
     </nav>
+</div>
+
+<div style="display:none;">
+    <script src="https://s19.cnzz.com/z_stat.php?id=1264355070&web_id=1264355070" language="JavaScript"></script>
 </div>
 
 <script src="http://localhost/js/jquery-3.2.1.min.js"></script>
