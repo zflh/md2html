@@ -1,10 +1,6 @@
 {
   "educate_str": "Java教程",
   "tab_content": {
-    "index": {
-      "url": "http://localhost/article/java/index.html",
-      "text": "Java教程"
-    },
     "basic": {
       "url": "http://localhost/article/java/basic/index.html",
       "text": "基础篇"

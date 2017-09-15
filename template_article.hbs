@@ -34,9 +34,6 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="http://localhost/index.html">首页</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="http://localhost/about.html">关于</a></li>
             </ul>
@@ -45,6 +42,12 @@
 </nav>
 
 <div class="container">
+    <!-- 顶部面包屑导航-->
+    <ol class="breadcrumb">
+        <li><a href="http://localhost/index.html">首页</a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{educate_str}}</a></li>
+    </ol>
+    <hr>
     <!-- 顶部标签页-->
     <ul class="nav nav-tabs" role="tablist">
         {{#each tab_content}}
@@ -60,6 +63,12 @@
         <!-- 替换这个区域-->
         {{{content}}}
     </div>
+    <hr>
+    <!-- 底部面包屑导航-->
+    <ol class="breadcrumb">
+        <li><a href="http://localhost/index.html">首页</a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{educate_str}}</a></li>
+    </ol>
     <hr>
     <nav>
         <ul class="pager">

@@ -1,10 +1,6 @@
 {
   "educate_str": "编程数学",
   "tab_content": {
-    "index": {
-      "url": "http://localhost/article/math/index.html",
-      "text": "编程数学"
-    },
     "basic": {
       "url": "http://localhost/article/math/basic/index.html",
       "text": "基础篇"
