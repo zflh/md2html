@@ -62,9 +62,13 @@ function readFolder(folderName) {
 				} else {
 					if (file.endsWith('.md')) {
 						let mdFile = folderName + '/' + file;
-						let outFileName = '';
+						let outFileName = null;
 						if (folderName === mdParam) {
-							outFileName = htmlParam + '/' + file.replace('.md', '.html');
+							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
+							const fileShowName = removeFileNumberAndSufix(file);
+							if (fileShowName) {
+								outFileName = htmlParam + '/' + fileShowName + '.html';
+							}
 						} else {
 							let subFulder = folderName.replace(mdParam + "/", '');
 							let outFolder = htmlParam + '/' + subFulder;
@@ -73,12 +77,20 @@ function readFolder(folderName) {
 								console.log('not exist make dir outFolder :' + outFolder);
 								fs.mkdirSync(outFolder);
 							}
-							outFileName = outFolder + '/' + file.replace('.md', '.html');
+							
+							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
+							const fileShowName = removeFileNumberAndSufix(file);
+							if (fileShowName) {
+								outFileName = outFolder + '/' + fileShowName + '.html';
+							}
 						}
 						folderName.trim();
-						outFileName.trim();
-						console.log('mdFile:' + mdFile + ' outFileName :' + outFileName);
-						convertFile(mdFile, outFileName, file);
+						if (outFileName) {
+							console.log('mdFile:' + mdFile + ' outFileName :' + outFileName);
+							convertFile(mdFile, outFileName, file);
+						} else {
+							console.warn('文件名不合法, 忽略文件 file ' + file);
+						}
 					}
 				}
 			});
@@ -102,22 +114,28 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 	console.log("convertFile fileName " + fileName);
 	console.log("-------------------------------------------------------");
 	const num = parseInt(fileName.split('.')[0]);
-	/** 配置表中加入其它参数*/
-	article_config.title = fileName.replace('.md', '');
-	article_config.content = htmlData;
-	article_config.last = getLast(num);
-	article_config.next = getNext(num);
-	article_config.article_type = article_type;
-	article_config.sub_folder = article_path_sub_folder;
-	article_config.tab_content[article_path_sub_folder].isActive = "true";
-	/** 读取handlebars模板数据*/
-	const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
-	/** 转化为html数据*/
-	const compiled = Handlebars.compile(mustache_data);
-	let firstHtmlData = compiled(article_config);
-	/** 写入文件*/
-	fs.writeFileSync(outHtmlFile, firstHtmlData);
-	console.log("OK.");
+	/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
+	const fileShowName = removeFileNumberAndSufix(fileName);
+	if (fileShowName) {
+		/** 配置表中加入其它参数*/
+		article_config.title = fileShowName;
+		article_config.content = htmlData;
+		article_config.last = getLast(num);
+		article_config.next = getNext(num);
+		article_config.article_type = article_type;
+		article_config.sub_folder = article_path_sub_folder;
+		article_config.tab_content[article_path_sub_folder].isActive = "true";
+		/** 读取handlebars模板数据*/
+		const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
+		/** 转化为html数据*/
+		const compiled = Handlebars.compile(mustache_data);
+		let firstHtmlData = compiled(article_config);
+		/** 写入文件*/
+		fs.writeFileSync(outHtmlFile, firstHtmlData);
+		console.log("OK.");
+	} else {
+		console.warn("忽略没有加序号的文件 mdFile: " + mdFile);
+	}
 }
 
 /**
@@ -148,7 +166,10 @@ function getLast(num) {
 	let i = 0, length = allFileName.length;
 	for (; i < length; i++) {
 		if (allFileName[i].startsWith(lastFileStart)) {
-			return allFileName[i].replace('.md', '.html');
+			const fileShowName = removeFileNumberAndSufix(allFileName[i]);
+			if (fileShowName) {
+				return fileShowName + '.html';
+			}
 		}
 	}
 	return null;
@@ -165,8 +186,31 @@ function getNext(num) {
 	let i = 0, length = allFileName.length;
 	for (; i < length; i++) {
 		if (allFileName[i].startsWith(nextFileStart)) {
-			return allFileName[i].replace('.md', '.html');
+			const fileShowName = removeFileNumberAndSufix(allFileName[i]);
+			if (fileShowName) {
+				return fileShowName + '.html';
+			}
 		}
 	}
 	return null;
+}
+
+/**
+ * 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引
+ * 移除后缀名
+ * 文件名必修以"数字"+"."开始, 否则会错
+ */
+function removeFileNumberAndSufix(fileName) {
+	const fileNumber = fileName.split('.')[0];
+	let intFileNumber = parseInt(fileName);
+	if (intFileNumber) {
+		/** 首字母是数字*/
+		/**  移除第一个点之前的字符, 然后组合字符串*/
+		let removeNumberStr = fileName.replace(fileNumber + '.', '');
+		/** 移除文件后缀*/
+		return removeNumberStr.replace('.md', '');
+	} else {
+		/** 首字母不是数字, 忽略该文件*/
+		return null;
+	}
 }
