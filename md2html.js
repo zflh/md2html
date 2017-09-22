@@ -65,7 +65,7 @@ function readFolder(folderName) {
 						let outFileName = null;
 						if (folderName === mdParam) {
 							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
-							const fileShowName = removeFileNumberAndSufix(file);
+							const fileShowName = removeFileNumberAndSuffix(file);
 							if (fileShowName) {
 								outFileName = htmlParam + '/' + fileShowName + '.html';
 							}
@@ -79,7 +79,7 @@ function readFolder(folderName) {
 							}
 							
 							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
-							const fileShowName = removeFileNumberAndSufix(file);
+							const fileShowName = removeFileNumberAndSuffix(file);
 							if (fileShowName) {
 								outFileName = outFolder + '/' + fileShowName + '.html';
 							}
@@ -115,7 +115,7 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 	console.log("-------------------------------------------------------");
 	const num = parseInt(fileName.split('.')[0]);
 	/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
-	const fileShowName = removeFileNumberAndSufix(fileName);
+	const fileShowName = removeFileNumberAndSuffix(fileName);
 	if (fileShowName) {
 		/** 配置表中加入其它参数*/
 		article_config.title = fileShowName;
@@ -166,7 +166,7 @@ function getLast(num) {
 	let i = 0, length = allFileName.length;
 	for (; i < length; i++) {
 		if (allFileName[i].startsWith(lastFileStart)) {
-			const fileShowName = removeFileNumberAndSufix(allFileName[i]);
+			const fileShowName = removeFileNumberAndSuffix(allFileName[i]);
 			if (fileShowName) {
 				return fileShowName + '.html';
 			}
@@ -186,7 +186,7 @@ function getNext(num) {
 	let i = 0, length = allFileName.length;
 	for (; i < length; i++) {
 		if (allFileName[i].startsWith(nextFileStart)) {
-			const fileShowName = removeFileNumberAndSufix(allFileName[i]);
+			const fileShowName = removeFileNumberAndSuffix(allFileName[i]);
 			if (fileShowName) {
 				return fileShowName + '.html';
 			}
@@ -200,7 +200,7 @@ function getNext(num) {
  * 移除后缀名
  * 文件名必修以"数字"+"."开始, 否则会错
  */
-function removeFileNumberAndSufix(fileName) {
+function removeFileNumberAndSuffix(fileName) {
 	const fileNumber = fileName.split('.')[0];
 	let intFileNumber = parseInt(fileName);
 	if (intFileNumber) {

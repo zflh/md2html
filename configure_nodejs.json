@@ -1,0 +1,9 @@
+{
+  "educate_str": "Nodejs教程",
+  "tab_content": {
+    "addenda": {
+      "url": "http://localhost/article/nodejs/addenda/index.html",
+      "text": "附录"
+    }
+  }
+}
