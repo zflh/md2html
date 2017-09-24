@@ -3,15 +3,7 @@
   "tab_content": {
     "basic": {
       "url": "http://localhost/article/java/basic/index.html",
-      "text": "基础篇"
-    },
-    "promote": {
-      "url": "http://localhost/article/java/promote/index.html",
-      "text": "进阶篇"
-    },
-    "advance": {
-      "url": "http://localhost/article/java/advance/index.html",
-      "text": "高级篇"
+      "text": "Java教程"
     },
     "addenda": {
       "url": "http://localhost/article/java/addenda/index.html",
