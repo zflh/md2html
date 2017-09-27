@@ -125,6 +125,8 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 		article_config.article_type = article_type;
 		article_config.sub_folder = article_path_sub_folder;
 		article_config.tab_content[article_path_sub_folder].isActive = "true";
+		/** 获取二级目录导航*/
+		article_config.nav_str_2 = article_config.tab_content[article_path_sub_folder].nav_str_2;
 		/** 读取handlebars模板数据*/
 		const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
 		/** 转化为html数据*/

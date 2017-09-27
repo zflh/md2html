@@ -1,9 +1,9 @@
 {
-  "educate_str": "Html教程",
+  "nav_str_1": "Html教程",
   "tab_content": {
     "faq": {
       "url": "http://localhost/article/html/faq/index.html",
-      "text": "FAQ"
+      "nav_str_2": "FAQ"
     }
   }
 }

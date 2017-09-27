@@ -1,17 +1,17 @@
 {
-  "educate_str": "linux配置及命令",
+  "nav_str_1": "linux配置及命令",
   "tab_content": {
     "common": {
       "url": "http://localhost/article/linux/common/index.html",
-      "text": "linux通用"
+      "nav_str_2": "linux通用"
     },
     "ubuntu": {
       "url": "http://localhost/article/linux/ubuntu/index.html",
-      "text": "ubuntu"
+      "nav_str_2": "ubuntu"
     },
     "centos": {
       "url": "http://localhost/article/linux/centos/index.html",
-      "text": "centos"
+      "nav_str_2": "centos"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
-  "educate_str": "Excel教程",
+  "nav_str_1": "Excel教程",
   "tab_content": {
-    "basic": {
-      "url": "http://localhost/article/excel/basic/index.html",
-      "text": "基础篇"
+    "faq": {
+      "url": "http://localhost/article/excel/faq/index.html",
+      "nav_str_2": "FAQ"
     }
   }
 }

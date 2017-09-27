@@ -1,13 +1,13 @@
 {
-  "educate_str": "Java教程",
+  "nav_str_1": "Java教程",
   "tab_content": {
     "basic": {
       "url": "http://localhost/article/java/basic/index.html",
-      "text": "Java教程"
+      "nav_str_2": "教程列表"
     },
     "addenda": {
       "url": "http://localhost/article/java/addenda/index.html",
-      "text": "附录"
+      "nav_str_2": "附录"
     }
   }
 }

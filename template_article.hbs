@@ -45,17 +45,18 @@
 <div class="container">
     <!-- 顶部面包屑导航-->
     <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{educate_str}}</a></li>
+        <li><a href="http://localhost/index.html"><b>首页</b></a></li>
+        <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
     </ol>
     <hr>
     <!-- 顶部标签页-->
     <ul class="nav nav-tabs" role="tablist">
         {{#each tab_content}}
             {{#if isActive}}
-                <li class="active"><a href="{{url}}">{{text}}</a></li>
+                <li class="active"><a href="{{url}}">{{nav_str_2}}</a></li>
             {{else}}
-                <li><a href="{{url}}">{{text}}</a></li>
+                <li><a href="{{url}}">{{nav_str_2}}</a></li>
             {{/if}}
         {{/each}}
     </ul>
@@ -67,8 +68,9 @@
     <hr>
     <!-- 底部面包屑导航-->
     <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{educate_str}}</a></li>
+        <li><a href="http://localhost/index.html"><b>首页</b></a></li>
+        <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
     </ol>
     <hr>
     <nav>

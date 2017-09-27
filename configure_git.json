@@ -1,9 +1,9 @@
 {
-  "educate_str": "Git教程",
+  "nav_str_1": "Git教程",
   "tab_content": {
-    "basic": {
-      "url": "http://localhost/article/git/basic/index.html",
-      "text": "基础篇"
+    "faq": {
+      "url": "http://localhost/article/git/faq/index.html",
+      "nav_str_2": "FAQ"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
-  "educate_str": "Windows教程",
+  "nav_str_1": "Windows教程",
   "tab_content": {
-    "basic": {
-      "url": "http://localhost/article/windows/basic/index.html",
-      "text": "基础篇"
+    "faq": {
+      "url": "http://localhost/article/windows/faq/index.html",
+      "nav_str_2": "FAQ"
     }
   }
 }
