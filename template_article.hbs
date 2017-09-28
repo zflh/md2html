@@ -47,7 +47,8 @@
     <ol class="breadcrumb">
         <li><a href="http://localhost/index.html"><b>首页</b></a></li>
         <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
+        <li class="active"><a
+                href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
     </ol>
     <hr>
     <!-- 顶部标签页-->
@@ -70,23 +71,24 @@
     <ol class="breadcrumb">
         <li><a href="http://localhost/index.html"><b>首页</b></a></li>
         <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
+        <li class="active"><a
+                href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
     </ol>
     <hr>
-    <nav>
-        <ul class="pager">
-            {{#if last}}
-                <li>
-                    <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}"><span>◀</span>上一篇</a>
-                </li>
-            {{/if}}
-            {{#if next}}
-                <li>
-                    <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}">下一篇<span>▶</span></a>
-                </li>
-            {{/if}}
-        </ul>
-    </nav>
+    <!--<nav>-->
+    <div class="text-center">
+        {{#if last}}
+            <div>
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}.html">🔺 上一篇: {{last}}</a>
+            </div>
+        {{/if}}
+        {{#if next}}
+            <div>
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}.html">🔻 下一篇: {{next}}</a>
+            </div>
+        {{/if}}
+    </div>
+    <!--</nav>-->
 </div>
 
 <div style="display:none;">

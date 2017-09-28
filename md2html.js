@@ -170,7 +170,7 @@ function getLast(num) {
 		if (allFileName[i].startsWith(lastFileStart)) {
 			const fileShowName = removeFileNumberAndSuffix(allFileName[i]);
 			if (fileShowName) {
-				return fileShowName + '.html';
+				return fileShowName;
 			}
 		}
 	}
@@ -190,7 +190,7 @@ function getNext(num) {
 		if (allFileName[i].startsWith(nextFileStart)) {
 			const fileShowName = removeFileNumberAndSuffix(allFileName[i]);
 			if (fileShowName) {
-				return fileShowName + '.html';
+				return fileShowName;
 			}
 		}
 	}
