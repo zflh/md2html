@@ -49,53 +49,57 @@
     <!-- 顶部面包屑导航-->
     <ol class="breadcrumb">
         <li><a href="http://localhost/index.html"><b>首页</b></a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
-        <li class="active"><a
-                href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
     </ol>
     <hr>
-    <!-- 顶部标签页-->
-    <ul class="nav nav-tabs" role="tablist">
-        {{#each tab_content}}
-            {{#if isActive}}
-                <li class="active"><a href="{{url}}">{{nav_str_2}}</a></li>
-            {{else}}
-                <li><a href="{{url}}">{{nav_str_2}}</a></li>
-            {{/if}}
-        {{/each}}
-    </ul>
-    <!--文档区-->
-    <div>
-        👯转载请保留原文链接👉:<a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{fileShowName}}.html">http://localhost/article/{{article_type}}/{{sub_folder}}/{{fileShowName}}.html</a>
+    <div id="xs_index" class="col-sm-3 col-md-3 col-lg-3 col-xs-12 hidden-xs">
+        <!-- 索引-->
+        <div id="xs_index_close" class="text-right visible-xs" onclick="hideIndex()">
+            关闭❎
+            <hr>
+        </div>
+        <div>
+            {{{index_data}}}
+        </div>
     </div>
-
-    <div>
-        <!-- 替换这个区域-->
-        {{{content}}}
+    <div id="sx_index_button" class="visible-xs-block" onclick="showIndex()">
+        <!-- 小屏显示目录-->
+        <div id="sx_index_button_text">
+            <span style="color: white">🔖目录</span>
+        </div>
     </div>
-    <hr>
+    <div id="xs_content">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <!-- 文章内容-->
+            <div id="xs_content_border">
+                {{{content}}}
+                <span>最新内容会在源站更新,转载请保留原文链接👉: <a
+                        href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{fileShowName}}.html">http://localhost/article/{{article_type}}
+                    /{{sub_folder}}/{{fileShowName}}.html</a>
+                </span>
+            </div>
+        </div>
+    </div>
     <!-- 底部面包屑导航-->
     <ol class="breadcrumb">
         <li><a href="http://localhost/index.html"><b>首页</b></a></li>
         <li><a href="http://localhost/article/{{article_type}}/index.html"><b>{{nav_str_1}}</b></a></li>
-        <li class="active"><a
-                href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html"><b>{{nav_str_2}}</b></a></li>
     </ol>
     <hr>
-    <!--<nav>-->
     <div class="text-center">
         {{#if last}}
             <div>
-                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}.html">🔺 上一篇: {{last}}</a>
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}.html">🔺
+                    上一篇: {{last}}</a>
             </div>
         {{/if}}
         {{#if next}}
             <div>
-                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}.html">🔻 下一篇: {{next}}</a>
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}.html">🔻
+                    下一篇: {{next}}</a>
             </div>
         {{/if}}
     </div>
-    <!--</nav>-->
 </div>
 
 <div style="display:none;">
@@ -106,5 +110,6 @@
 <script src="http://localhost/js/vendor/modernizr-custom.js"></script>
 <script src="http://localhost/js/bootstrap.js"></script>
 <script src="http://localhost/js/google-code-prettify/run_prettify.js"></script>
+<script src="http://localhost/js/main.js"></script>
 </body>
 </html>

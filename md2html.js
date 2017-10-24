@@ -16,6 +16,7 @@ const article_type = process.argv[4];
 const article_path_sub_folder = process.argv[5];
 
 const article_config = require("./configure_" + article_type + ".json");
+const article_index = "./index_" + article_type + ".html";
 
 var allFileName = [];
 getAllFolderFileName(mdParam);
@@ -128,7 +129,10 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 		/** 获取二级目录导航*/
 		article_config.nav_str_2 = article_config.tab_content[article_path_sub_folder].nav_str_2;
 		article_config.fileShowName = fileShowName;
-		/** 读取handlebars模板数据*/
+		/** 获取索引*/
+        const index_data = fs.readFileSync(article_index, 'utf-8');
+        article_config.index_data = index_data;
+        /** 读取handlebars模板数据*/
 		const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
 		/** 转化为html数据*/
 		const compiled = Handlebars.compile(mustache_data);
