@@ -1,9 +1,0 @@
-{
-  "nav_str_1": "编程数学",
-  "tab_content": {
-    "basic": {
-      "url": "http://localhost/article/math/basic/index.html",
-      "nav_str_2": "基础篇"
-    }
-  }
-}

@@ -5,8 +5,8 @@ const showdown = require('sinbad_showdown');
 const Handlebars = require("handlebars");
 
 /** Check for arguments*/
-if (process.argv.length < 6) {
-	console.log("Usage: node md2html.js FOLDER_NAME OUT_FOLDER_NAME article_path article_path_sub_folder");
+if (process.argv.length < 7) {
+	console.log("Usage: node md2html.js FOLDER_NAME OUT_FOLDER_NAME article_path article_path_sub_folder NAV_STR");
 	process.exit(1);
 }
 
@@ -14,8 +14,8 @@ const mdParam = process.argv[2];
 const htmlParam = process.argv[3];
 const article_type = process.argv[4];
 const article_path_sub_folder = process.argv[5];
+const nav_str = process.argv[6];
 
-const article_config = require("./configure_" + article_type + ".json");
 const article_index = "./index_" + article_type + ".html";
 
 var allFileName = [];
@@ -118,20 +118,21 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 	/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
 	const fileShowName = removeFileNumberAndSuffix(fileName);
 	if (fileShowName) {
-		/** 配置表中加入其它参数*/
+        /** 配置表中加入其它参数*/
+        let article_config = {};
 		article_config.title = fileShowName;
 		article_config.content = htmlData;
 		article_config.last = getLast(num);
 		article_config.next = getNext(num);
 		article_config.article_type = article_type;
 		article_config.sub_folder = article_path_sub_folder;
-		article_config.tab_content[article_path_sub_folder].isActive = "true";
 		/** 获取二级目录导航*/
-		article_config.nav_str_2 = article_config.tab_content[article_path_sub_folder].nav_str_2;
 		article_config.fileShowName = fileShowName;
 		/** 获取索引*/
         const index_data = fs.readFileSync(article_index, 'utf-8');
         article_config.index_data = index_data;
+        /** 面包屑导航名*/
+        article_config.nav_str = nav_str;
         /** 读取handlebars模板数据*/
 		const mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
 		/** 转化为html数据*/
