@@ -16,7 +16,7 @@ const article_type = process.argv[4];
 const article_path_sub_folder = process.argv[5];
 const nav_str = process.argv[6];
 
-const article_index = "./index_" + article_type + ".html";
+const article_index = article_type + ".html";
 
 var allFileName = [];
 getAllFolderFileName(mdParam);
