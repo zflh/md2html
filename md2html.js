@@ -16,7 +16,7 @@ const article_type = process.argv[4];
 const article_path_sub_folder = process.argv[5];
 const nav_str = process.argv[6];
 
-const article_index = article_type + ".html";
+const article_index = "D:/workplace/git/Doc/dashidan.com/index_template/" + article_type + ".html";
 
 var allFileName = [];
 getAllFolderFileName(mdParam);
@@ -66,9 +66,9 @@ function readFolder(folderName) {
 						let outFileName = null;
 						if (folderName === mdParam) {
 							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
-							const fileShowName = removeFileNumberAndSuffix(file);
-							if (fileShowName) {
-								outFileName = htmlParam + '/' + fileShowName + '.html';
+							const fileNumber = getFileNumber(file);
+							if (fileNumber) {
+								outFileName = htmlParam + '/' + fileNumber + '.html';
 							}
 						} else {
 							let subFulder = folderName.replace(mdParam + "/", '');
@@ -80,10 +80,10 @@ function readFolder(folderName) {
 							}
 							
 							/** 输出文件名去掉"1.", 只用"."后边的文件名, 这样调整顺序时, 不影响文章的索引*/
-							const fileShowName = removeFileNumberAndSuffix(file);
-							if (fileShowName) {
-								outFileName = outFolder + '/' + fileShowName + '.html';
-							}
+                            const fileNumber = getFileNumber(file);
+                            if (fileNumber) {
+                                outFileName = htmlParam + '/' + fileNumber + '.html';
+                            }
 						}
 						folderName.trim();
 						if (outFileName) {
@@ -124,6 +124,7 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 		article_config.content = htmlData;
 		article_config.last = getLast(num);
 		article_config.next = getNext(num);
+		article_config.nextNum = num + 1;
 		article_config.article_type = article_type;
 		article_config.sub_folder = article_path_sub_folder;
 		/** 获取二级目录导航*/
@@ -222,3 +223,22 @@ function removeFileNumberAndSuffix(fileName) {
 		return null;
 	}
 }
+
+
+/**
+ * 输出文件名采用数字
+ * 移除后缀名
+ * 文件名必修以"数字"+"."开始, 否则会错
+ */
+function getFileNumber(fileName) {
+    const fileNumber = fileName.split('.')[0];
+    let intFileNumber = parseInt(fileNumber);
+    if (intFileNumber) {
+        /** 首字母是数字*/
+        return intFileNumber;
+    } else {
+        /** 首字母不是数字, 忽略该文件*/
+        return null;
+    }
+}
+

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="http://localhost/css/dashidan.css">
 </head>
 <body>
+
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
@@ -51,7 +52,6 @@
         <li><a href="http://localhost/index.html">首页</a></li>
         <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{nav_str}}</a></li>
     </ol>
-    <hr>
     <div id="xs_index" class="col-sm-3 col-md-3 col-lg-3 col-xs-12 hidden-xs">
         <!-- 索引-->
         <div id="xs_index_close" class="text-right visible-xs" onclick="hideIndex()">
@@ -78,16 +78,10 @@
             </div>
         </div>
     </div>
-    <!-- 底部面包屑导航-->
-    <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html">{{nav_str}}</a></li>
-    </ol>
-    <hr>
     <div class="text-center">
         {{#if next}}
             <div>
-                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}.html">📖
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{nextNum}}.html">📖
                     下一篇: {{next}}</a>
             </div>
         {{/if}}
