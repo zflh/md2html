@@ -6,11 +6,16 @@
     <title>{{title}}</title>
     <meta name="description" content="{{title}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
 
-    <link rel="apple-touch-icon" href="http://localhost/apple-touch-icon.png">
     <link rel="stylesheet" href="http://localhost/css/bootstrap.css">
+    <link rel="stylesheet" href="http://localhost/css/dashidan.css">
 </head>
 <body>
+
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
@@ -18,7 +23,6 @@
 
 <nav class="navbar navbar-default">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -32,60 +36,67 @@
             </a>
             <a class="navbar-brand" href="http://localhost/index.html">大屎蛋教程网</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="http://localhost/index.html">首页</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="http://localhost/about.html">关于</a></li>
-                <!--<li><a href="#">登陆</a></li>-->
-                <!--<li><a href="#">注册</a></li>-->
+                <li><a href="http://localhost/thanks.html">鸣谢</a></li>
+				<li><a href="http://localhost/siteMap.html">网站地图</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <!-- 文章导航条-->
+    <!-- 顶部面包屑导航-->
     <ol class="breadcrumb">
         <li><a href="http://localhost/index.html">首页</a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
+        <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{nav_str}}</a></li>
     </ol>
-    <hr>
-    <!--标题区-->
-    <div class="page-header">
-        <h2>{{title}}</h2>
+    <div id="xs_index" class="col-sm-3 col-md-3 col-lg-3 col-xs-12 hidden-xs">
+        <!--
+        <div id="xs_index_close" class="text-right visible-xs" onclick="hideIndex()">
+            关闭❎
+            <hr>
+        </div>
+		-->
+        <div>
+            {{{index_data}}}
+        </div>
     </div>
-    <!--文档区-->
-    <div>
-        <!-- 替换这个区域-->
-        {{{content}}}
+    <div id="sx_index_button" class="visible-xs-block" onclick="showIndex()">
+        <!-- 小屏显示目录-->
+        <div id="sx_index_button_text">
+            <span style="color: white">🔖目录</span>
+        </div>
     </div>
-    <hr>
-    <!-- 文章导航条-->
-    <ol class="breadcrumb">
-        <li><a href="http://localhost/index.html">首页</a></li>
-        <li><a href="http://localhost/article/{{article_type}}/index.html">{{educate}}</a></li>
-        <li class="active"><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/index.html">{{level}}</a></li>
-    </ol>
-    <hr>
-    <nav>
-        <ul class="pager">
-            {{#if last}}
-                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{last}}"><span>&larr;</span>上一篇</a></li>
-            {{/if}}
-            {{#if next}}
-                <li><a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{next}}">下一篇<span>&rarr;</span></a></li>
-            {{/if}}
-        </ul>
-    </nav>
+    <div id="xs_content">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <!-- 文章内容-->
+            <div id="xs_content_border">
+                {{{content}}}
+                <span>转载请保留原文链接: <a href="http://localhost/article/{{article_type}}/index.html">http://localhost/article/{{article_type}}/index.html</a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        {{#if next}}
+            <div>
+                <a href="http://localhost/article/{{article_type}}/{{sub_folder}}/{{nextNum}}.html">📖
+                    下一篇: {{next}}</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+<div style="display:none;">
+    <script src="https://s19.cnzz.com/z_stat.php?id=1264355070&web_id=1264355070" language="JavaScript"></script>
 </div>
 
 <script src="http://localhost/js/jquery-3.2.1.min.js"></script>
 <script src="http://localhost/js/vendor/modernizr-custom.js"></script>
 <script src="http://localhost/js/bootstrap.js"></script>
 <script src="http://localhost/js/google-code-prettify/run_prettify.js"></script>
+<script src="http://localhost/js/main.js"></script>
 </body>
 </html>
