@@ -18,6 +18,6 @@
   "homepage": "https://github.com/dashidan/md2html#readme",
   "dependencies": {
     "handlebars": "^4.0.10",
-    "sinbad_showdown": "^1.0.30"
+    "sinbad_showdown": "^1.0.34"
   }
 }
