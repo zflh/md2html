@@ -128,7 +128,7 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 		article_config.article_type = article_type;
 		article_config.sub_folder = article_path_sub_folder;
 		/** 获取二级目录导航*/
-		article_config.fileShowName = fileShowName;
+		article_config.fileName = fileShowName;
 		/** 获取索引*/
         const index_data = fs.readFileSync(article_index, 'utf-8');
         article_config.index_data = index_data;
