@@ -109,6 +109,7 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 	let converter = new showdown.Converter();
 	let htmlData = converter.makeHtml(mdData);
 	let outFolder = path.dirname(outHtmlFile);
+    let descriptionFileName = mdFile.replace('.md', '.dec');;
 	mkdirs(outFolder);
 	/** 不转化index.md, 采用单独的模板, 这里只转化文章内容*/
 	console.log("-------------------------------------------------------");
@@ -132,6 +133,8 @@ function convertFile(mdFile, outHtmlFile, fileName) {
 		/** 获取索引*/
         const index_data = fs.readFileSync(article_index, 'utf-8');
         article_config.index_data = index_data;
+        const description = fs.readFileSync(descriptionFileName, 'utf-8');
+        article_config.description = description;
         /** 面包屑导航名*/
         article_config.nav_str = nav_str;
         /** 读取handlebars模板数据*/
