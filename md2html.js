@@ -7,6 +7,11 @@ const Handlebars = require("handlebars");
 const article_type = process.argv[2];
 const article_path_sub_folder = process.argv[3];
 const mdParam = "D:/workplace/git/Doc/educate/" + article_type + "/" + article_path_sub_folder;
+
+const css_bootstrap = "D:/workplace/git/Doc/dashidan.com/css/bootstrap.css";
+const css_dashidan = "D:/workplace/git/Doc/dashidan.com/css/dashidan.css";
+
+
 /** 默认转化pc页面*/
 let convertType = "pc";
 if (process.argv.length >= 4) {
@@ -145,6 +150,8 @@ function convertFile(mdFile, outHtmlFile, fileName) {
         if (convertType == "mip") {
             /** mip读取template_article_mip.hbs*/
             mustache_data = fs.readFileSync("template_article_mip.hbs", 'utf-8');
+            article_config.css_bootstrap = fs.readFileSync(css_bootstrap, 'utf-8');
+            article_config.css_dashidan = fs.readFileSync(css_dashidan, 'utf-8');
         } else {
             /** 默认pc文件 读取template_article.hbs*/
             mustache_data = fs.readFileSync("template_article.hbs", 'utf-8');
@@ -241,7 +248,6 @@ function removeFileNumberAndSuffix(fileName) {
     }
 }
 
-
 /**
  * 输出文件名采用数字
  * 移除后缀名
@@ -258,4 +264,3 @@ function getFileNumber(fileName) {
         return null;
     }
 }
-
