@@ -11,13 +11,18 @@ const mdParam = "D:/workplace/git/Doc/educate/" + article_type + "/" + article_p
 const css_bootstrap = "D:/workplace/git/Doc/dashidan.com/css/bootstrap.css";
 const css_dashidan = "D:/workplace/git/Doc/dashidan.com/css/dashidan.css";
 
-
 /** 默认转化pc页面*/
 let convertType = "pc";
 if (process.argv.length >= 4) {
     /** 转化类型 可选[mip, amp]*/
     convertType = process.argv[4];
+
+    if(convertType != "mip") {
+        console.log('error 参数错误 convertType:' + convertType);
+        return;
+    }
 }
+
 /** 生成的html文件目录*/
 let htmlParam;
 /** 文章目录索引*/
