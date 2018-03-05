@@ -33,6 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+        <a class="navbar-brand" href="http://localhost/index.html">大屎蛋教程网</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -45,10 +46,9 @@
 <div class="fullscreen">
     <div class="container-fluid">
         <!-- 顶部面包屑导航-->
-        <ol class="breadcrumb">
-            <li><a href="http://localhost/index.html">首页</a></li>
-            <li class="active"><a href="http://localhost/article/{{article_type}}/index.html">{{nav_str}}</a></li>
-        </ol>
+        <div>
+            <a href="http://localhost/index.html">首页</a> > <a href="http://localhost/article/{{article_type}}/index.html">{{article_type}}</a> > {{fileName}}
+        </div>
 
         <div class="dsd_content">
             <div id="xs_index" class="col-sm-3 col-md-3 col-lg-3 col-xs-12 hidden-xs">
@@ -58,7 +58,7 @@
             </div>
             <div class="col-sm-9 col-md-9 col-lg-9">
                 <!-- 文章内容-->
-                <div class="dsd_title"><h1>{{fileName}}</h1></div>
+                <article class="dsd_title_1"><h1>{{fileName}}</h1></article>
                 <div id="xs_content_border">
                     {{{content}}}
                 </div>
